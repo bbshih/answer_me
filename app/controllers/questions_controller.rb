@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   # GET /questions
   # GET /questions.json
   def index
@@ -35,13 +37,12 @@ class QuestionsController < ApplicationController
   # GET /questions/1/edit
   def edit
     @question = Question.find(params[:id])
-  end
+      end
 
   # POST /questions
   # POST /questions.json
   def create
     @question = Question.new(params[:question])
-
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -57,7 +58,7 @@ class QuestionsController < ApplicationController
   # PUT /questions/1.json
   def update
     @question = Question.find(params[:id])
-
+    current_user.questions << @question
     respond_to do |format|
       if @question.update_attributes(params[:question])
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }

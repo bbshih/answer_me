@@ -11,13 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528012058) do
+ActiveRecord::Schema.define(:version => 20130528042522) do
 
   create_table "questions", :force => true do |t|
     t.string   "inquiry"
     t.string   "answer"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "questions_users", :id => false, :force => true do |t|
+    t.integer "question_id"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|
@@ -33,7 +38,6 @@ ActiveRecord::Schema.define(:version => 20130528012058) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "uncofirmed_email"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
