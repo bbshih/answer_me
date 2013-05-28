@@ -1,3 +1,3 @@
 class Question < ActiveRecord::Base
-  attr_accessible :inquiry
+  attr_accessible :answer, :inquiry
 end
